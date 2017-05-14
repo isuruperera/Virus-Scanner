@@ -1,0 +1,11 @@
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\bin\Debug\Virus-Scanner.exe.config
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\obj\Debug\Virus-Scanner.csprojResolveAssemblyReference.cache
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\obj\Debug\Virus_Scanner.Form1.resources
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\obj\Debug\Virus_Scanner.Properties.Resources.resources
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\obj\Debug\Virus-Scanner.csproj.GenerateResource.Cache
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\bin\Debug\Virus-Scanner.exe
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\bin\Debug\Virus-Scanner.pdb
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\bin\Debug\MySql.Data.dll
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\bin\Debug\MySql.Data.xml
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\obj\Debug\Virus-Scanner.exe
+C:\Repositories\VirusScanner\Virus-Scanner\Virus-Scanner\obj\Debug\Virus-Scanner.pdb
