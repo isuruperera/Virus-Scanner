@@ -26,6 +26,7 @@ namespace Virus_Scanner
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //MySql Credentials are taken by this
             string[] promptValue = Prompt.ShowDialog("Enter MySql Username and Password", "MySql Credentials");         
             if (promptValue != null)
             {
@@ -38,6 +39,8 @@ namespace Virus_Scanner
                 connectionStr.Password = password;
                 connectionStr.Server = "localhost";
                 sqlConnectionString = connectionStr.GetConnectionString(true);
+
+                //Check if the database of known malicious exsists in the PC 
                 using (MySqlConnection connDatabase = new MySqlConnection(sqlConnectionString))
                 {
                     try {
@@ -91,6 +94,7 @@ namespace Virus_Scanner
 
         }
 
+        //Asynchronous worker is used to read and execute sql script since the file is too large
         private void sqlScript_DoWork(object sender, DoWorkEventArgs e)
         {
             
@@ -102,12 +106,20 @@ namespace Virus_Scanner
             sqlConnectionString = connectionStr.GetConnectionString(true);
             using (MySqlConnection connDatabase = new MySqlConnection(sqlConnectionString))
             {
-                connDatabase.Open();
-                string query = File.ReadAllText("vx.sql");
-                MySqlScript script = new MySqlScript(connDatabase, query);
-                script.Delimiter = ";";
-                script.Execute();
-                connDatabase.Close();
+
+                try
+                {
+                    connDatabase.Open();
+                    string query = File.ReadAllText("vx.sql");
+                    MySqlScript script = new MySqlScript(connDatabase, query);
+                    script.Delimiter = ";";
+                    script.Execute();
+                    connDatabase.Close();
+                }
+                catch (Exception ex) {
+                    MessageBox.Show("vx.sql File not found! Please include it in the application directory and run again.");
+                }
+                
             }
         }
 
@@ -116,6 +128,7 @@ namespace Virus_Scanner
 
         }
 
+        //Detects the completion of asynchronous task to add the database with known malicious file details
         private void sqlScript_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {           
             log_list.Items.Add(String.Format("{0:T}", DateTime.Now) + ": Database Sync Finished");
@@ -131,8 +144,7 @@ namespace Virus_Scanner
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            
+            //Computes the MD5 hash of the input file and search  the database
             byte[] fileMD5Hash;
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -156,6 +168,8 @@ namespace Virus_Scanner
 
         }
 
+        //Query the database to find if computed MD5 hash matches with known definitions
+        //If it matches with any entries, the details of the malicious file will be shown in the log
         public string[] searchDatabase(string queryMD5)
         {
             string sqlConnectionString = "";
